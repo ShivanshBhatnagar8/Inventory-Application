@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Inventory Application</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <form method="POST" class="creation-form" action="/form">
+        <div>
+          <label for="book">Enter Book Name:</label>
+          <input id="book" type="text" name="book" required />
+        </div>
+        <div>
+          <label for="author">Enter Author Name:</label>
+          <input id="author" type="text" name="author" required />
+        </div>
+        <div>
+          <label for="user">Enter Category:</label>
+          <input id="category" type="text" name="category" required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

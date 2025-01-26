@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Inventory App</title>
+  </head>
+  <body>
+    <nav>
+      <div class="navigation-heading">
+        <h1>Book Inventory</h1>
+      </div>
+      <ul>
+        <li><a href="/">Books</a></li>
+        <li><a href="/authors">Authors</a></li>
+        <li><a href="/category">Category</a></li>
+      </ul>
+    </nav>
+    <div class="book-container">
+      <% books.forEach((book) => { %>
+      <div class="book-box">
+        <h2 class="book-name"><%= book.name %></h2>
+        <p class="author-name">Author: <%= book.author_name %></p>
+        <p class="category-name">Category: <%= book.category_name %></p>
+        <form class="hidden" data-id="<%= book.id%>" method="POST" action="/">
+          <label for="book">Enter book name</label>
+          <input type="text" name="book" id="book" required />
+          <label for="author">Enter author name</label>
+          <input type="text" name="author" id="author" required />
+          <label for="category">Enter category name</label>
+          <input type="text" name="category" id="category" required />
+          <input
+            class="hidden"
+            type="text"
+            name="id"
+            id="id"
+            value="<%= book.id %>"
+          />
+          <div class="button-container">
+            <button type="submit">Submit</button>
+            <button class="cancel" data-id="<%= book.id%>">Cancel</button>
+          </div>
+        </form>
+        <div class="button-container">
+          <button class="edit-btn" data-id="<%= book.id%>">Edit</button>
+          <button class="delete-btn" data-id="<%= book.id%>">Delete</button>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <div class="form-button">
+      <a class="add-form" href="/form">+</a>
+    </div>
+    <script>
+      const editButton = document.querySelectorAll(".edit-btn");
+      const form = document.querySelectorAll(".hidden");
+      const cancelButton = document.querySelectorAll(".cancel");
+      const deleteButton = document.querySelectorAll(".delete-btn");
+
+      editButton.forEach((el) => {
+        el.addEventListener("click", function (e) {
+          form.forEach((f) => {
+            if (e.target.dataset.id === f.dataset.id) {
+              f.classList.remove("hidden");
+              f.classList.add("update-form");
+            }
+          });
+        });
+      });
+
+      cancelButton.forEach((el) => {
+        el.addEventListener("click", function (e) {
+          e.preventDefault();
+          form.forEach((f) => {
+            if (e.target.dataset.id === f.dataset.id) {
+              f.classList.add("hidden");
+              f.classList.remove("update-form");
+            }
+          });
+        });
+      });
+
+      async function deleteBook(id) {
+        await fetch("http://localhost:3000/delete", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            bookId: id,
+          }),
+        });
+      }
+
+      deleteButton.forEach((el) => {
+        el.addEventListener("click", function (e) {
+          deleteBook(e.target.dataset.id);
+          location.reload();
+        });
+      });
+    </script>
+  </body>
+</html>
