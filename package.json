@@ -7,11 +7,19 @@
   },
   "author": "Shivansh Bhatnagar",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "pg": "^8.12.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShivanshBhatnagar8/Inventory-Application.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShivanshBhatnagar8/Inventory-Application/issues"
+  },
+  "homepage": "https://github.com/ShivanshBhatnagar8/Inventory-Application#readme",
+  "description": ""
 }
